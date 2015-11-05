@@ -1,0 +1,263 @@
+<html>
+	<head>
+		<title>Resume of Michael</title>
+		<meta charset="UTF-8"/>
+		
+		
+		
+		<style>
+			*
+{
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	font-family: "SimHei";
+	font-weight: 100;
+
+}
+
+div{
+	width: 0px;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+}
+
+.baseboard{
+	z-index:-1;
+	width: 100%;
+	height: 100%;
+	background-color: #A9A9A9;
+}
+
+
+.mypic{
+	position: absolute;
+	z-index: 2;
+	height: 200px;
+	width:200px;
+	background-color: #2A3F55;
+	border-radius:50%;
+	text-align: center;
+	transition: all 1s;
+	box-shadow: 0px 0px 25px -3px black;
+}
+
+.mypic a{
+	position: relative;
+	font-size: 40px;
+	top: 60px;
+	color: #A9A9A9;
+}
+
+/*when hover for mypic*/
+.mypic:hover{
+	opacity: 0;
+	background-color: #A9A9A9;
+	transition: all 1.7s;
+}
+
+
+
+.mypic:hover + .lifeline{
+	opacity: 1;
+	transition: all 1s 1s;
+} 
+
+.mypic:hover + .lifeline > .mainpic{  /*when hover mypic, the event for a of the lifepoint*/
+	opacity: 1;
+	transition: all 1s 2s;
+} 
+.mypic:hover + .lifeline > .mainintroduction{  /*when hover mypic, the event for a of the lifepoint*/
+	opacity: 1;
+	transition: all 1s 2.5s;
+} 
+
+.mypic:hover + .lifeline > .lifepoint{  /*when hover mypic, the event for a of the lifepoint*/
+	width: 650px;
+	transition: all 1s 3s;
+} 
+
+
+.mypic:hover + .lifeline > .lifepoint a{  /*when hover mypic, the event for a of the lifepoint*/
+	opacity: 1;
+	color: black;
+	transition: all 1s 4s;
+} 
+
+
+.lifeline{
+	opacity: 0;
+	z-index: 0;
+	position:absolute;
+	width: 1300px;
+	height: 700px;	
+	background-color: #2A3F55;
+	box-shadow: 0px 0px 40px -9px black;
+}
+
+
+.lifepoint{
+	opacity: 1;
+	z-index: 1;
+	position: absolute;
+	top: 0px;
+	width: 10px;
+	height: 70px;
+	background-color: burlywood;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	text-align: left;
+	
+	box-shadow: -5px 0px 25px -3px black;
+
+}
+
+.lifepoint a{
+	opacity: 0;
+	position: relative;
+	top: 22px;
+	left: 30px;
+	font-size: 18px;
+	color: burlywood;
+	font-weight: 100;
+	font-family: "YaHei";
+}
+
+
+
+.mainpic{
+	opacity: 0;
+	position: absolute;
+	z-index: 1;
+	overflow: hidden;
+	left: 170px;
+	top: 90px;	
+	height: 300px;
+	width:300px;
+	background-color: #2A3F55;
+	border-radius:50%;
+	box-shadow: 0px 0px 35px -6px black;
+}
+
+.mainpic img{
+	position: relative;
+	top:-7px;
+	left: -45px;
+	width: 450px;
+	border-radius:0%;
+
+	
+}
+
+.mainintroduction{
+	opacity: 0;
+	position: absolute;
+	top: 415px;
+	left: 83px;
+	width:480px;
+	text-align: center;
+}
+
+
+.mainintroduction p{
+	
+	font-size: 15px;
+	font-family: "YaHei";
+	
+}
+		</style>
+		
+		
+		<script>
+	window.onload = function align(){
+	var client_width = document.body.clientWidth;
+	var client_height =document.body.clientHeight;
+	
+	var obj_mypic = document.getElementById("mypic_0");
+	var obj_lifeline = document.getElementById("lifeline_0");
+	var obj_lifepoint = new Array();
+	var lifepoint_width = new Array();
+	var lifepoint_height = new Array();
+	var number_of_point = 4;
+	
+	for(var i = 0; i<number_of_point; i++){
+		obj_lifepoint[i] = document.getElementById("lifepoint_"+i);
+		lifepoint_width[i] = obj_lifepoint[i].offsetWidth;
+		lifepoint_height[i] = obj_lifepoint[i].offsetHeight;
+	}
+	
+	var mypic_width = obj_mypic.offsetWidth;
+	var mypic_height = obj_mypic.offsetHeight;
+		
+	var lifeline_width = obj_lifeline.offsetWidth;
+	var lifeline_height = obj_lifeline.offsetHeight;
+	
+	//align lifeline
+	obj_lifeline.style.left = (client_width - lifeline_width) / 2 + "px";
+	obj_lifeline.style.top = (client_height - lifeline_height) / 2 + "px";
+	
+	//aligh mypic ,,should be based on the lifeline  style.left according to client
+	obj_mypic.style.left = (client_width - lifeline_width) / 2 + (lifeline_width - mypic_width) / 2 + "px";
+	obj_mypic.style.top = (client_height - lifeline_height) / 2 + (lifeline_height - mypic_height) / 2 + "px";	
+	
+	
+	for(var i = 0; i<number_of_point; i++){
+		
+		var lifepoint_height_gap = ( lifeline_height - number_of_point*lifepoint_height[0] ) / (number_of_point + 1);
+		//obj_lifepoint[i].style.left = (lifeline_width - lifepoint_width[i]) / 2 + "px"; /*to center align the liftpoint*/
+		//if(i%2 == 0)
+		//	obj_lifepoint[i].style.left = 0;
+		//else
+			obj_lifepoint[i].style.right = 0; 
+		obj_lifepoint[i].style.top = (lifepoint_height_gap*(i+1) + lifepoint_height[0]*i)  + "px";	
+
+	}	
+	
+}
+		</script>
+		
+		
+		
+	</head>
+
+	<body >
+		<div class="baseboard">
+			
+			<div class="mypic" id="mypic_0">
+				<a>Michael<br>Lee</a>
+			</div>
+			
+			<div class="lifeline" id="lifeline_0">
+				
+				<div class="mainpic"><img src="head.jpg"/></div>
+				<div class="mainintroduction"><p style="font-size:50px; ">李文立</p>
+												<p style="font-size:40px; margin-top:-10px;">Michael Lee</p>
+										<!--		<p style="font-size:26px;  margin-top:4px; font-weight:500;">擅长：网站前端（HTML、CSS、JS）
+												<br>&nbsp;&nbsp;&nbsp;视频图像（PS、AE、PR）</p>		
+										-->							
+												<p style="font-size:20px;  margin-top:10px;font-weight:500;">暨南大学·计算机科学与技术·本科</p>
+												<p style="font-size:17px; font-weight:500;">TELL:15627862375
+												<br>MAIL:ligupublic@outlook.com</p></div>
+				
+				<div class="lifepoint" id="lifepoint_0">
+					<a>--前暨南大学网络联盟前端开发成员（HTML、CSS、Javascript）</a>
+				</div>
+				
+				<div class="lifepoint" id="lifepoint_1">
+					<a>--连续两年负责学生会视频剪辑工作（Afect Effect、Adobe Premiere）</a>
+				</div>
+				<div class="lifepoint" id="lifepoint_2">
+					<a>--有两个月在线超市（飞牛网大润发）美工经验（Photoshop）</a>
+				</div>
+				<div class="lifepoint" id="lifepoint_3">
+					<a>--对科技有着浓厚兴趣，热爱学习，热情待人</a>
+				</div>				
+			</div>	
+			
+		</div>
+	</body>
+	
+</html>
